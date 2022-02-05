@@ -15,6 +15,7 @@ public class PlayerBean {
 	public int currentNumberOfCards;
 	public int currentHandValue;
 	public int currentRoundIn;
+	public int playerInGameStatus; //0 in game, 1 lost, 2 winner
 	public CardBean cardFromDeck;
 	public List<CardBean> currentPlayerCards = new ArrayList<CardBean>();
 	
@@ -23,7 +24,7 @@ public class PlayerBean {
 	}
 
 	public PlayerBean(char playerID, String playerName, int playerMoney, int playerMoneyInRound,
-			int currentNumberOfCards, int currentHandValue, int currentRoundIn, CardBean cardFromDeck,
+			int currentNumberOfCards, int currentHandValue, int currentRoundIn, int playerInGameStatus, CardBean cardFromDeck,
 			List<CardBean> currentPlayerCards) {
 		super();
 		this.playerID = playerID;
@@ -33,6 +34,7 @@ public class PlayerBean {
 		this.currentNumberOfCards = currentNumberOfCards;
 		this.currentHandValue = currentHandValue;
 		this.currentRoundIn = currentRoundIn;
+		this.playerInGameStatus = playerInGameStatus;
 		this.cardFromDeck = cardFromDeck;
 		this.currentPlayerCards = currentPlayerCards;
 	}
@@ -92,7 +94,15 @@ public class PlayerBean {
 	public void setCurrentRoundIn(int currentRoundIn) {
 		this.currentRoundIn = currentRoundIn;
 	}
-
+	
+	public int getPlayerInGameStatus() {
+		return playerInGameStatus;
+	}
+	
+	public void setPlayerInGameStatus(int playerInGameStatus) {
+		this.playerInGameStatus = playerInGameStatus;
+	}
+	
 	public CardBean getCardFromDeck() {
 		return cardFromDeck;
 	}

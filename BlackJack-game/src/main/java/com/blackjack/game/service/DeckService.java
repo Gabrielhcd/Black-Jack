@@ -12,7 +12,7 @@ public class DeckService {
 	
 	private List<CardBean> cardsDeck = new ArrayList<CardBean>();
 	
-	public void createDeck() {
+	public List<CardBean> createDeck() {
 		
 		System.out.println("Deck sin barajear");
 		
@@ -26,23 +26,27 @@ public class DeckService {
 					
 					cardsDeck.add(cardBean);
 					
-					System.out.println(cardBean);
+					//System.out.println(cardBean);
 					
 			}	
 		}
 		
-		System.out.println("Deck barajeado");
-		shuffleDeck(cardsDeck);
+		return cardsDeck;
+		
 	}
 	
-	public void shuffleDeck(List<CardBean> shuffledDeck) {
+	public List<CardBean> shuffleDeck(List<CardBean> cardsDeck) {
 		
-		Collections.shuffle(shuffledDeck, new Random());
+		Collections.shuffle(cardsDeck, new Random());
 		
-		for(CardBean cardBean : shuffledDeck) {
+		/*for(CardBean cardBean : cardsDeck) {
 			System.out.println(cardBean);
-		}
+		}*/
 		
+		System.out.println("Deck barajeado");
+		System.out.println("Deck size: " + cardsDeck.size() + " DeckService");
+		
+		return cardsDeck;
 		
 	}
 }

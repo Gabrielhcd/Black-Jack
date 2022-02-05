@@ -16,9 +16,9 @@ public class BlackJackGameApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		DeckService deckService = new DeckService();
+		LaunchGameComponent launchGameComponent = new LaunchGameComponent();
 		
-		deckService.createDeck();
+		launchGameComponent.launchGame();
 		
 	}
 
