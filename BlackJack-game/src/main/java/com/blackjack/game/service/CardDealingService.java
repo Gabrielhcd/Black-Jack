@@ -8,15 +8,28 @@ import com.blackjack.game.beans.PlayerBean;
 
 public class CardDealingService {
 	
-	private List<CardBean> tmpCards = new ArrayList<CardBean>();
-	private PlayerBean playerBean = new PlayerBean();
+	private List<CardBean> cardsForPlayer = new ArrayList<CardBean>();
 	
-	public void dealCardsToPlayers(List<CardBean> deck, PlayerBean player, int cardsToDeal) {
+	public void dealCardsPerPlayer(List<CardBean> cardsDeck, int playerID, int amountOfCardsToDeal) {
 		
 		int cardsDealed = 0;
+		System.out.println("Deck size: " + cardsDeck.size() + " CardDealer");
+		System.out.println("Entering dealCardsPerPlayer");
 		
+		PlayerBean playerBean = new PlayerBean();
 		
+		while(amountOfCardsToDeal > 0) {
+			
+			cardsForPlayer.add(cardsDeck.get((cardsDeck.size() - 1) - cardsDealed));
+			System.out.println("Deck size: " + cardsDeck.size());
+			cardsDeck.remove((cardsDeck.size() - 1) - cardsDealed);
+			cardsDealed++;
+			amountOfCardsToDeal--;
+		}
+		
+		playerBean.setCurrentPlayerCards(cardsForPlayer);
+		System.out.println("Cards dealed to playerID " + playerID);
 		
 	}
-
+	
 }
