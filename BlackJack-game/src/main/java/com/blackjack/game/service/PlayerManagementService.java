@@ -7,6 +7,8 @@ import com.blackjack.game.beans.PlayerBean;
 
 public class PlayerManagementService {
 	
+	private PlayersHandManagementService playersHandManagementService = new PlayersHandManagementService();
+	
 	private List<PlayerBean> listOfPlayers = new ArrayList<PlayerBean>();
 
 	public void createHousePlayer() {
@@ -56,6 +58,14 @@ public class PlayerManagementService {
 		}
 		
 		return listOfPlayersInGame;
+		
+	}
+	
+	public void setCurrentValueInEachHand() {
+		
+		for(PlayerBean playerBean : listOfPlayers) {
+			playerBean.setCurrentHandValue(playersHandManagementService.checkTotalInPlayersHand(playerBean.getCurrentPlayerCards()));
+		}
 		
 	}
 	

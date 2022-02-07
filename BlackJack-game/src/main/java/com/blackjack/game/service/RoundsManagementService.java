@@ -14,51 +14,56 @@ public class RoundsManagementService {
 	private DeckService deckService = new DeckService();
 	private PlayerManagementService playerManagementService = new PlayerManagementService();
 	private CardDealingService cardDealingService = new CardDealingService();
+	private PlayersHandManagementService playersHandManagementService = new PlayersHandManagementService();
+	
+	private List<PlayerBean> listOfPlayers = playerManagementService.currentListOfPlayersInGame();
+	private int cardsToDeal = 0;
 	
 	private String PLAYER_NAME = "Player1";
 	
-	public void startRound(int currentRound) {
-		
-		
-		
-		List<PlayerBean> currentListOfPlayers = playerManagementService.currentListOfPlayersInGame();
+	public void manageRoundBegining(int currentRound) {
 		
 		if(currentRound == 1) {
 			
+			cardsToDeal = 2;
 			playerManagementService.createHousePlayer();
 			playerManagementService.createPlayer(PLAYER_NAME);
 			orderedDeck = deckService.createDeck();
 			shuffledDeck = deckService.shuffleDeck(orderedDeck);
 			
-			if(currentListOfPlayers.isEmpty()) {
-				
-				System.out.println("Players list is empty man :( ");
-				
-			}
-			else {
-				
-				for(PlayerBean playerBean : currentListOfPlayers) {
-					System.out.println("Entra al ciclo para repartir");
-					System.out.println("Deck size: " + shuffledDeck.size() + " RoundsManager");
-					cardDealingService.dealCardsPerPlayer(shuffledDeck, playerBean.getPlayerID(), 2);
-				}
-				
-				System.out.println("Cards dealed for first round");
-				
-			}
-			
+			startRound();
+		}
+		else {
+			startRound();
 		}
 		
+		finishRound();
+	
 	}
 	
-	public void checkPlayersHand(PlayerBean playerBean) {
+	public void startRound() {
 		
-		for(CardBean cardBean : playerBean.getCurrentPlayerCards()) {
-			
-			
-			
+		for(PlayerBean playerBean : listOfPlayers) {
+				cardDealingService.dealCardsPerPlayer(shuffledDeck, playerBean.getPlayerID(), cardsToDeal);
 		}
+	}
+	
+	public void finishRound() {
 		
+		for(PlayerBean playerBean : listOfPlayers) {
+			playersHandManagementService.determinatePlayersHandValue(playerBean.getCurrentHandValue());
+		}
+	}
+	
+	public boolean askPlayerForMoreCards() {
+		
+		int playersResponse = 0;
+		if(playersResponse == 1) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

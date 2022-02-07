@@ -10,7 +10,7 @@ public class LaunchGameComponent {
 	
 	public void launchGame() {
 			
-		roundsManagementService.startRound(FIRST_ROUND);
+		roundsManagementService.manageRoundBegining(FIRST_ROUND);
 		
 	}
 
