@@ -1,6 +1,6 @@
 package com.blackjack.game;
 
-import com.blackjack.game.service.RoundsManagementService;
+import com.blackjack.game.serviceImplementation.RoundsManagementService;
 
 public class LaunchGameComponent {
 	
@@ -10,7 +10,7 @@ public class LaunchGameComponent {
 	
 	public void launchGame() {
 			
-		roundsManagementService.manageRoundBegining(FIRST_ROUND);
+		roundsManagementService.roundManager(FIRST_ROUND);
 		
 	}
 

@@ -1,4 +1,4 @@
-package com.blackjack.game.service;
+package com.blackjack.game.serviceImplementation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

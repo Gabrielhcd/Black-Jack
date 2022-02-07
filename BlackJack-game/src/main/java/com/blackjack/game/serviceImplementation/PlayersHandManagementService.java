@@ -1,4 +1,4 @@
-package com.blackjack.game.service;
+package com.blackjack.game.serviceImplementation;
 
 import java.util.List;
 
@@ -23,17 +23,21 @@ public class PlayersHandManagementService {
 		
 	}
 
-	public int determinatePlayersHandValue(int currentHandValue) {
-		if(currentHandValue > 21) {
-			return 2;
+	public int assignPlayerInGameStatus(PlayerBean player) {
+		
+		int playerInGameStatus = 0;
+		
+		if(player.getCurrentHandValue() > 21) {
+			playerInGameStatus = 1;//Looser
 		}
-		if(currentHandValue == 21) {
-			return 0;
+		else if(player.getCurrentHandValue() == 21) {
+			playerInGameStatus = 2;//Winner
 		}
-		else {
-			return 1;
+		else if(player.getCurrentHandValue() < 21) {
+			playerInGameStatus = 0;//Player
 		}
 		
+		return playerInGameStatus;
 	}
 	
 	public void determinatePlayerInGameStatus(List<PlayerBean> listOfPlayers) {

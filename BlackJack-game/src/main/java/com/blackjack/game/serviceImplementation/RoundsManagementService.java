@@ -1,4 +1,4 @@
-package com.blackjack.game.service;
+package com.blackjack.game.serviceImplementation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,15 +17,13 @@ public class RoundsManagementService {
 	private PlayersHandManagementService playersHandManagementService = new PlayersHandManagementService();
 	
 	private List<PlayerBean> listOfPlayers = playerManagementService.currentListOfPlayersInGame();
-	private int cardsToDeal = 0;
 	
 	private String PLAYER_NAME = "Player1";
 	
-	public void manageRoundBegining(int currentRound) {
+	public void roundManager(int currentRound) {
 		
 		if(currentRound == 1) {
 			
-			cardsToDeal = 2;
 			playerManagementService.createHousePlayer();
 			playerManagementService.createPlayer(PLAYER_NAME);
 			orderedDeck = deckService.createDeck();
@@ -44,18 +42,37 @@ public class RoundsManagementService {
 	public void startRound() {
 		
 		for(PlayerBean playerBean : listOfPlayers) {
-				cardDealingService.dealCardsPerPlayer(shuffledDeck, playerBean.getPlayerID(), cardsToDeal);
+				cardDealingService.dealCardsPerPlayer(shuffledDeck, playerBean.getPlayerID(), 2);
 		}
 	}
 	
 	public void finishRound() {
 		
+		playerManagementService.totalInHandPlayersCardValue(listOfPlayers);
+		playersHandManagementService.determinatePlayerInGameStatus(listOfPlayers);
+		
+	}
+	
+	public void askPlayersForMoreCards() {
+		
 		for(PlayerBean playerBean : listOfPlayers) {
-			playersHandManagementService.determinatePlayersHandValue(playerBean.getCurrentHandValue());
+			
+			if(playerWantsACard()) {
+				cardDealingService.dealCardsPerPlayer(shuffledDeck, playerBean.getPlayerID(), 1);
+				askPlayersForMoreCards();
+			}
+			if(!playerWantsACard()){
+				playerManagementService.totalInHandPlayersCardValue(listOfPlayers);
+			}
 		}
 	}
 	
-	public boolean askPlayerForMoreCards() {
+	public void giveCardToPlayer(PlayerBean player) {
+		
+		
+	}
+	
+	public boolean playerWantsACard() {
 		
 		int playersResponse = 0;
 		if(playersResponse == 1) {

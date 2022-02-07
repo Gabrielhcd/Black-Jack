@@ -1,4 +1,4 @@
-package com.blackjack.game.service;
+package com.blackjack.game.serviceImplementation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,12 +61,19 @@ public class PlayerManagementService {
 		
 	}
 	
-	public void setCurrentValueInEachHand() {
+	public void totalInHandPlayersCardValue(List<PlayerBean> listOfPlayers) {
 		
 		for(PlayerBean playerBean : listOfPlayers) {
 			playerBean.setCurrentHandValue(playersHandManagementService.checkTotalInPlayersHand(playerBean.getCurrentPlayerCards()));
+			playerBean.setPlayerInGameStatus(playersHandManagementService.assignPlayerInGameStatus(playerBean));
 		}
 		
+	}
+	
+	public void totalInHandPlayersCardValue(PlayerBean player) {
+		
+		player.setCurrentHandValue(playersHandManagementService.checkTotalInPlayersHand(player.getCurrentPlayerCards()));
+		player.setPlayerInGameStatus(playersHandManagementService.assignPlayerInGameStatus(player));
 	}
 	
 }
