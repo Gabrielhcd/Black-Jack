@@ -15,7 +15,7 @@ public class PlayerBean {
 	public int currentNumberOfCards;
 	public int currentHandValue;
 	public int currentRoundIn;
-	public int playerInGameStatus; //0 in game, 1 lost, 2 winner
+	public int playerInGameStatus; //0 looses, 1 continues, 2 winner
 	public CardBean cardFromDeck;
 	public List<CardBean> currentPlayerCards = new ArrayList<CardBean>();
 	

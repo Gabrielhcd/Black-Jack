@@ -7,53 +7,35 @@ import com.blackjack.game.beans.PlayerBean;
 import com.blackjack.game.constants.CardNumbers;
 
 public class PlayersHandManagementService {
-	
-	public static int checkTotalInPlayersHand(List<CardBean> playersDeckInHand) {	
-		
-		int totalInHand = 0;
-		
-		for(CardBean cardBean : playersDeckInHand) {
-			for(CardNumbers cardNumbers : CardNumbers.values()) {
-				totalInHand += cardNumbers.getCardNumber();
-			}
-			
-		}
-		
-		return totalInHand;
-		
-	}
 
-	public int determinatePlayersHandValue(int currentHandValue) {
-		if(currentHandValue > 21) {
-			return 2;
-		}
-		if(currentHandValue == 21) {
-			return 0;
-		}
-		else {
-			return 1;
-		}
+	public void setPlayerInGameStatus(PlayerBean player) {
 		
+		if(player.getCurrentHandValue() == 21) {
+			player.setPlayerInGameStatus(2);
+		}
+		else if(player.getCurrentHandValue() < 21) {
+			player.setPlayerInGameStatus(1);
+		}
+		else if(player.getCurrentHandValue() > 21) {
+			player.setPlayerInGameStatus(0);
+		}
 	}
 	
-	public void determinatePlayerInGameStatus(List<PlayerBean> listOfPlayers) {
+	public void removeLooserFromGame(List<PlayerBean> listOfPlayers) {
 		
-		for(PlayerBean playerBean : listOfPlayers) {
-			
-			if(playerBean.getPlayerInGameStatus() == 1) {
-				listOfPlayers.remove(playerBean.getPlayerID());
-				System.out.println("Player with ID " + playerBean.getPlayerID() + "removed");
+		for(PlayerBean player : listOfPlayers) {
+			if(player.getPlayerInGameStatus() == 0) {
+				listOfPlayers.remove(player);
 			}
-			if(playerBean.getPlayerInGameStatus() == 2) {
-				System.out.println("Player with ID " + playerBean.getPlayerID() + "won!!!");
+		}
+	}
+	
+	public void checkForWinnerPlayer(List<PlayerBean> listOfPlayers) {
+		
+		for(PlayerBean player : listOfPlayers) {
+			if(player.getPlayerInGameStatus() == 2) {
+				System.out.println("Player " + player.getPlayerName() + " Wins!!!!");
 			}
-			if(playerBean.getPlayerInGameStatus() == 0) {
-				System.out.println("Player with ID " + playerBean.getPlayerID() + "continues");
-			}
-			else {
-				System.out.println("An unexpected error ocurred");
-			}
-			
 		}
 	}
 
