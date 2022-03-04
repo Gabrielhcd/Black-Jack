@@ -4,7 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.blackjack.game.service.*;
+import com.blackjack.game.service.GameStatusService;
 
 @SpringBootApplication
 public class BlackJackGameApplication implements CommandLineRunner {
@@ -16,9 +16,9 @@ public class BlackJackGameApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		LaunchGameComponent launchGameComponent = new LaunchGameComponent();
+		GameStatusService gameStatusService = new GameStatusService();
 		
-		launchGameComponent.launchGame();
+		gameStatusService.startGame();
 		
 	}
 

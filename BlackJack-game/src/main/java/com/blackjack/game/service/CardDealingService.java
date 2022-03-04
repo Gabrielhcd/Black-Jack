@@ -8,27 +8,25 @@ import com.blackjack.game.beans.PlayerBean;
 
 public class CardDealingService {
 	
-	private List<CardBean> cardsForPlayer = new ArrayList<CardBean>();
+	private List<CardBean> cardsToDealToPlayer = new ArrayList<CardBean>();
 	
-	public void dealCardsPerPlayer(List<CardBean> cardsDeck, int playerID, int amountOfCardsToDeal) {
-		
-		int cardsDealed = 0;
-		System.out.println("Deck size: " + cardsDeck.size() + " CardDealer");
+	public void dealCardsPerPlayer(List<CardBean> cardsDeck, PlayerBean playerToDeal, int amountOfCardsToDeal) {
+
 		System.out.println("Entering dealCardsPerPlayer");
-		
-		PlayerBean playerBean = new PlayerBean();
 		
 		while(amountOfCardsToDeal > 0) {
 			
-			cardsForPlayer.add(cardsDeck.get((cardsDeck.size() - 1) - cardsDealed));
-			System.out.println("Deck size: " + cardsDeck.size());
-			cardsDeck.remove((cardsDeck.size() - 1) - cardsDealed);
-			cardsDealed++;
+			cardsToDealToPlayer.add(cardsDeck.get(cardsDeck.size()-1));//add the last card to a temporary list
+			playerToDeal.setCurrentHandValue(playerToDeal.getCurrentHandValue() + 
+					cardsDeck.get(cardsDeck.size()-1).getNumber().getCardNumber());//add the latatest card to the current hand
+			cardsDeck.remove(cardsDeck.size()-1);//remove the last card from deck
 			amountOfCardsToDeal--;
+			
 		}
 		
-		playerBean.setCurrentPlayerCards(cardsForPlayer);
-		System.out.println("Cards dealed to playerID " + playerID);
+		playerToDeal.setCurrentPlayerCards(cardsToDealToPlayer);
+		//System.out.println("Cards dealed to playerID " + playerToDeal.getPlayerName() + " Cards " + playerToDeal.getCurrentPlayerCards());
+		cardsToDealToPlayer.clear();
 		
 	}
 	

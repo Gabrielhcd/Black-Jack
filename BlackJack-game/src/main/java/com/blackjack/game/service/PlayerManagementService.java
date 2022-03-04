@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.blackjack.game.beans.PlayerBean;
+import com.blackjack.game.userInput.RequestPlayerInput;
 
 public class PlayerManagementService {
 	
@@ -50,7 +51,7 @@ public class PlayerManagementService {
 		
 		List<PlayerBean> listOfPlayersInGame = listOfPlayers;
 		
-		System.out.println("List of Players in game: ");
+		//System.out.println("List of Players in game: ");
 		for(PlayerBean playerBean : listOfPlayersInGame) {
 			System.out.println(playerBean.getPlayerName());
 		}
