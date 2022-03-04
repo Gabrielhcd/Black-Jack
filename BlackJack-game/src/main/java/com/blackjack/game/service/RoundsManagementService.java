@@ -33,6 +33,8 @@ public class RoundsManagementService {
 				cardDealingService.dealCardsPerPlayer(shuffledDeck, player, 2);
 			}
 			
+		finishRound();
+			
 		}
 		
 		else {
@@ -46,13 +48,13 @@ public class RoundsManagementService {
 	
 	public void startRound() {
 		
-		boolean playerWantsMoreCards = true;
+		int playerWantsMoreCards = 0;
 		
 		for(PlayerBean player : listOfPlayers) {
 			
 			System.out.println(player.getCurrentPlayerCards());
 			playerWantsMoreCards = requestPlayerInput.inputAskingForOneCard();
-			while(playerWantsMoreCards) {
+			while(playerWantsMoreCards == 1) {
 				cardDealingService.dealCardsPerPlayer(shuffledDeck, player, 1);
 			}
 
@@ -64,19 +66,11 @@ public class RoundsManagementService {
 		
 		for(PlayerBean player : listOfPlayers) {
 			playersHandManagementService.setPlayerInGameStatus(player);
-			System.out.println(player.getPlayerName());
-			System.out.println(player.getCurrentPlayerCards());
 		}
 		
 		if((listOfPlayers.size()-1) > 1) {
 			playersHandManagementService.removeLooserFromGame(listOfPlayers);
 			playersHandManagementService.checkForWinnerPlayer(listOfPlayers);
-		}
-		else if((listOfPlayers.size()-1) == 1) {
-			System.out.println("Player wins!!");
-		}
-		else {
-			roundNumber++;
 		}
 		
 	}

@@ -17,10 +17,10 @@ public class RequestPlayerInput {
 		return playerName;
 	}
 	
-	public boolean inputAskingForOneCard() {
+	public int inputAskingForOneCard() {
 		
 		System.out.println("Do you want one more card");
-		boolean playerWantsCard = scanner.nextBoolean();
+		int playerWantsCard = scanner.nextInt();
 		return playerWantsCard;
 	}
 

@@ -25,7 +25,7 @@ public class CardDealingService {
 		}
 		
 		playerToDeal.setCurrentPlayerCards(cardsToDealToPlayer);
-		System.out.println("Cards dealed to playerID " + playerToDeal.getPlayerName() + " Cards " + playerToDeal.getCurrentPlayerCards());
+		//System.out.println("Cards dealed to playerID " + playerToDeal.getPlayerName() + " Cards " + playerToDeal.getCurrentPlayerCards());
 		cardsToDealToPlayer.clear();
 		
 	}
